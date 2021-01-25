@@ -1,7 +1,16 @@
 import sys
 sys.stdin = open("input.txt", 'r')
 
-T = int(input())
-for _ in range(T):
-    pos, s = input().split(); pos = int(pos)
-    print(s[:pos-1] + s[pos:])
+l = []
+def list_init():
+    cnt = 0
+    while True:
+        for i in range(1, 46):
+            for _ in range(i):
+                cnt+=1
+                l.append(i)
+                if cnt == 1000:
+                    return
+list_init()
+a, b = map(int, input().split())
+print(sum(l[a-1:b]))
