@@ -11,4 +11,3 @@ for _ in range(T):
         tmp.append((C, NAME))
     tmp.sort(reverse=True)
     print(tmp[0][1])
-        
