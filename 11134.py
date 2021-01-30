@@ -1,8 +1,10 @@
 import sys
 sys.stdin = open("input.txt", 'r')
 
-_, *S = map(lambda x: x.rstrip(), sys.stdin)
-
-for i in S:
-    N, C = map(int, i.split())
-    print(N//C if N%C == 0 else N//C+1)
+T = int(input())
+for i in range(T):
+    a = input()
+    b = input()
+    l = zip(a, b)
+    l = list(filter(lambda x:x[0]!=x[1], l))
+    print(f'Hamming distance is {len(l)}.')
