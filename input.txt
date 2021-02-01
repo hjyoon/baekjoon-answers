@@ -1,5 +1,6 @@
-PQR
-3
-PQRAAAAPQR
-BBPQRBBBBB
-CCCCCCCCCC
+5
+1 kg
+2 l
+7 lb
+3.5 g
+0 l  
