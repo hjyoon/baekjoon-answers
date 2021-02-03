@@ -2,13 +2,9 @@ import sys
 sys.stdin = open("input.txt", 'r')
 input = sys.stdin.readline
 
-T = int(input())
-
+T, *S = map(lambda x:x.rstrip(), sys.stdin)
+T = int(T)
 for i in range(T):
-    N, D = map(int, input().split())
-    cnt = 0
-    for j in range(N):
-        V, F, C = map(int, input().split())
-        if V/C*F >= D:
-            cnt += 1
-    print(cnt)
+    N, M = map(int, S[i].split())
+    s = ((M-N+1)*(N+M))//2
+    print(f'Scenario #{i+1}:\n{s}\n')
