@@ -1,7 +1,5 @@
-6
-Nat tan
-Palindrome 
-123454321
-Dogs and Cats
-**()()**
-1 221
+4
+GEORGE
+JOHN
+PAUL
+RINGO
