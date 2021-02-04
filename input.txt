@@ -1,1 +1,5 @@
-micro soft
+2 2
+AB
+CD
+AABB
+CCDD
