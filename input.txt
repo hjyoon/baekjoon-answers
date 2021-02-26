@@ -1,4 +1,9 @@
-The quick brown fox jumped over the lazy dogs.
-2 + 2 = 4
-New Zealand Programming Contest.
-#
+8
+Algorithm Crunching Man
+Green Lantern
+Boba Fett
+Superman
+Batman
+Green Goblin
+Barney
+Spider Pig
