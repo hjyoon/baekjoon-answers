@@ -1,5 +1,1 @@
-2
-10
-cbbbbccbb
-10
-bbbbbbbbbccbbb
+100000000
