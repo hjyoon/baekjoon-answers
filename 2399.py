@@ -2,11 +2,11 @@ import sys
 sys.stdin = open("input.txt", 'r')
 input = sys.stdin.readline
 
-_, S = map(lambda x:x.rstrip(), sys.stdin)
+N, S = map(lambda x:x.rstrip(), sys.stdin)
+N = int(N)
 x = map(int, S.split())
-import itertools
-i = itertools.combinations(x, 2)
+i = enumerate(sorted(x))
 
 import functools
-sum = functools.reduce(lambda x, y:x+abs(y[0]-y[1]), i, 0)
+sum = functools.reduce(lambda x, y:x+y[1]*(2*y[0]-N+1), i, 0)
 print(sum*2)
