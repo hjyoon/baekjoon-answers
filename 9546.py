@@ -2,8 +2,7 @@ import sys
 sys.stdin = open("input.txt", 'r')
 input = sys.stdin.readline
 
-T, *K = map(lambda x:x.rstrip(), sys.stdin)
-K = map(int, K)
+T, *K = map(int, sys.stdin)
 for v in K:
     res = 0
     for c in range(v):
