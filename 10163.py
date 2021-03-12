@@ -13,5 +13,6 @@ for i, v in enumerate(S, 1):
 
 import itertools
 l = tuple(itertools.chain(*l))
-for i in range(1, N+1):
-    print(l.count(i))
+# for i in range(1, N+1):
+#     print(l.count(i))
+[print(l.count(i)) for i in range(1, N+1)]
