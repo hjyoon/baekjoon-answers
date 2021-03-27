@@ -21,7 +21,6 @@ t = s.items()
 t = sorted(t)
 r = chk(t)
 if r == False:
-    print(t)
     print("I'm Sorry Hansoo")
 else:
     a = ''
