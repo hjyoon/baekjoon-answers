@@ -8,7 +8,8 @@ r = (0, 0)
 _, *S = map(lambda x:x.rstrip(), sys.stdin)
 for i, v in enumerate(S, 1):
     v = map(int, v.split())
-    for a, b, c in itertools.permutations(v, 3):
-        if (a+b+c)%10 >= r[1]:
-            r = (i, (a+b+c)%10)
+    for a, b, c in itertools.combinations(v, 3):
+        c = (a+b+c)%10
+        if c >= r[1]:
+            r = (i, c)
 print(r[0])
