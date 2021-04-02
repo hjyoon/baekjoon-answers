@@ -21,12 +21,7 @@ def miller_rabin(n, k):
         r += 1
         s //= 2
     for _ in range(k):
-        # try:
         a = random.randrange(2, n - 1)
-        # except ValueError:
-        #     if n == 3:
-        #         while True:
-        #             pass
         x = pow(a, s, n)
         if x == 1 or x == n - 1:
             continue
@@ -51,5 +46,3 @@ for v in S[:T]:
         print('YES')
     else:
         print('NO')
-
-miller_rabin(3, 20)
