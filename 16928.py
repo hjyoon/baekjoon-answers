@@ -25,5 +25,5 @@ def go(now, step):
         go(now+i, step+1)
 
 go(1, 0)
-print(*r)
+#print(*r)
 print(r[100])
