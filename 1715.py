@@ -20,5 +20,4 @@ while len(S) > 1:
     b = heapq.heappop(S)
     heapq.heappush(S, a+b)
     r += a+b
-    print(S)
 print(r)
