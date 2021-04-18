@@ -15,6 +15,7 @@ while True:
     i = 0
     c = 0
     r = 0
+    ans = 0
 
     while True:
         if i == len(s):
@@ -25,16 +26,19 @@ while True:
             dq.append(s[i])
             d[s[i]] = 1
             c += 1
+            r += 1
         else:
             dq.append(s[i])
             d[s[i]] += 1
+            r += 1
 
         while c > m:
             a = dq.popleft()
             if d[a] == 1:
                 c -= 1
             d[a] -= 1
+            r -= 1
 
         i += 1
-        r = max(r, len(dq))
-    print(r)
+        ans = max(ans, r)
+    print(ans)
