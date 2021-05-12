@@ -8,33 +8,31 @@ d = {}
 for _ in range(N):
     S.append(input().rstrip())
 
-SS = []
+ans = []
 
 for v in S:
-    t = v.split()
     ts = []
-    chk = False
-    for w in t:
-        s = str.lower(w[0])
-        if s not in d and chk == False:
-            d[s] = True
+    sw = False
+    for w in v.split():
+        ch = str.lower(w[0])
+        if ch not in d and sw == False:
+            d[ch] = True
             w = w.replace(w[0], f'[{w[0]}]', 1)
-            chk = True
+            sw = True
         ts.append(w)
-    if chk == True:
-        SS.append(' '.join(ts))
 
-    ts = []
-    end = False
-    if chk == False:
-        for s in v:
-            if str.isalpha(s):
-                t = str.lower(s)
-                if t not in d and end == False:
+    if sw == True:
+        ans.append(' '.join(ts))
+    else:
+        ts.clear()
+        for ch in v:
+            if str.isalpha(ch):
+                t = str.lower(ch)
+                if t not in d and sw == False:
                     d[t] = True
-                    s = f'[{s}]'
-                    end = True
-            ts.append(s)
-        SS.append(''.join(ts))
+                    ch = f'[{ch}]'
+                    sw = True
+            ts.append(ch)
+        ans.append(''.join(ts))
 
-print(*SS, sep='\n')
+print(*ans, sep='\n')
