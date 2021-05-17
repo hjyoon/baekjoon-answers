@@ -31,5 +31,3 @@ for i in range(1, T+1):
         print(f'Data Set {i}: equal\n')
     else:
         print(f'Data Set {i}: not equal\n')
-    #print(s1)
-    #print(s2)
