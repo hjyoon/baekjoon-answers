@@ -9,9 +9,6 @@ S = list(map(lambda x:x.rstrip(), sys.stdin))
 
 top_down = list(map(chr, range(65, 65+K)))
 
-#print(top_down)
-#print(bottom_up)
-
 for s in S:
     if s[0] == '?':
         break
@@ -32,31 +29,8 @@ for s in S[::-1]:
             else:
                 bottom_up[i], bottom_up[i+1] = bottom_up[i+1], bottom_up[i]
 
-# top_down = ['C', 'A', 'B']
-# bottom_up = ['C', 'B', 'A']
 
-# top_down = ['A', 'B', 'C']
-# bottom_up = ['B', 'A', 'C']
-
-# top_down = ['A', 'B', 'C']
-# bottom_up = ['C', 'B', 'A']
-
-# top_down = ['C', 'A', 'B']
-# bottom_up = ['B', 'C', 'A']
-
-# top_down = ['A', 'B', 'C']
-# bottom_up = ['A', 'B', 'C']
-
-# top_down = ['A', 'B']
-# bottom_up = ['A', 'B']
-
-# top_down = ['B', 'A']
-# bottom_up = ['A', 'B']
-
-#print(top_down)
-#print(bottom_up)
 ans = []
-
 i = 0
 while i < K-1:
     if top_down[i] == bottom_up[i]:
@@ -73,5 +47,5 @@ while i < K-1:
             ans.clear()
             ans.extend(['x']*(K-1))
             break
-    #print(ans)
+
 print(''.join(ans))
