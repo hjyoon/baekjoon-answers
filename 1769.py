@@ -1,5 +1,4 @@
 import sys
-import itertools
 DEBUG = 1
 
 TC = [
@@ -61,11 +60,10 @@ def main():
             print(res)
 
 def print_data():
-    in_f = open("input.txt", 'r')
-    out_f = open("output.txt", 'r')
-    tmp = []
-    read_data(tmp, in_f, out_f)
-    print(tmp)
+    with open("input.txt", 'r') as in_f, open("output.txt", 'r') as out_f:
+        tmp = []
+        read_data(tmp, in_f, out_f)
+        print(tmp)
 
 if __name__ == "__main__":
     main()
