@@ -1,49 +1,48 @@
 import sys
-input = sys.stdin.readline
 DEBUG = 1
 
+A = 'N'
+B = 'S'
+
 TC = [
-    {'N': 3, 'S': ['Cat', 'fat', 'bAt'],'AC':'bAt'},
-    {'N': 4, 'S': ['call', 'ball', 'All', 'Hall'],'AC':'All'},
-    {'N': 4, 'S': ['BAc', 'CAb', 'BCa', 'CBa'],'AC':'BAc'},
+    {A:3,B:['Cat','fat','bAt'],'AC':'bAt'},
+    {A:4,B:['call','ball','All','Hall'],'AC':'All'},
+    {A:4,B:['BAc','CAb','BCa','CBa'],'AC':'BAc'},
 ]
 
-def copy_data():
-    global input
-    sys.stdin = open("input.txt", 'r')
-    input = sys.stdin.readline
-    tmp = []
-    read_data(tmp)
-    print(tmp)
-
-def read_data(l):
-    l = list(l)
+def read_data(l, in_f, out_f=None):
+    input = in_f.readline
     while True:
-        N = int(input())
-        if N == 0:
+        n = int(input().rstrip())
+        if n == 0:
             break
-        S = []
-        for _ in range(N):
-            S.append(input().rstrip())
-        l.append({'N':N, 'S':S})
+        s = []
+        for _ in range(n):
+            s.append(input().rstrip())
 
-if DEBUG:
-    #copy_data()
-    #print(TC)
-    pass
-else:
-    TC.clear()
-    read_data(TC)
+        if DEBUG:
+            ac = out_f.readline().rstrip()
+            l.append({A:n, B:s, 'AC':ac})
+        else:
+            l.append({A:n, B:s})
 
-def solution(N, S):
+def solution(n, s):
     ans = []
-    S = sorted(map(lambda x:(x.lower(), x), S))
-    ans.append(S[0][1])
+    s = sorted(map(lambda x:(x.lower(), x), s))
+    ans.append(s[0][1])
     return '\n'.join(ans)
 
 def main():
+    if DEBUG:
+        #print_data()
+        #print(TC)
+        pass
+    else:
+        TC.clear()
+        read_data(TC, sys.stdin)
+
     for i, v in enumerate(TC, 1):
-        res = solution(v['N'], v['S'])
+        res = solution(v[A], v[B])
 
         if DEBUG:
             if res == v['AC']:
@@ -57,4 +56,12 @@ def main():
         else:
             print(res)
 
-main()
+def print_data():
+    in_f = open("input.txt", 'r')
+    out_f = open("output.txt", 'r')
+    tmp = []
+    read_data(tmp, in_f, out_f)
+    print(tmp)
+
+if __name__ == "__main__":
+    main()
