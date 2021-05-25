@@ -18,7 +18,7 @@ def read_data(l, in_f, out_f=None):
 
 def solution(s):
     ans = []
-    s = list(map(lambda x:x.strip(), s.split('\n')))
+    s = map(lambda x:x.strip(), s.split('\n'))
     s = list(map(lambda x:x.split(), s))
     m = len(max(s, key=lambda x:len(x)))
     sz = [0] * m
