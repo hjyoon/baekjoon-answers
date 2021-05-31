@@ -28,10 +28,9 @@ def solution(S, W, C):
     ans = None
     ans = ''.join(map(lambda x:x[0].upper(), S.split()))
     S += ans
-    
-    d = {' ':W}
-    for i, v in enumerate(C, ord('A')):
-        d[chr(i)] = v
+
+    d = {chr(i) : v for i, v in enumerate(C, ord('A'))}
+    d[' '] = W
 
     pre = None
     for s in S:
