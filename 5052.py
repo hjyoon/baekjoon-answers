@@ -6,16 +6,22 @@ import array
 DEBUG = 1
 
 TC = [
-    {'data': ['abcdabcabb'], 'AC': '3'},
-    {'data': ['abcbca'], 'AC': '2'},
+    {'data': [2, [[3, ['911', '97625999', '91125426']], [5, ['113', '12340', '123440', '12345', '98346']]]], 'AC': 'NO\nYES'},
 ]
 
 def read_data(l, in_f, out_f=None):
     input = in_f.readline
     #N, S = map(lambda x:x.rstrip(), in_f)
-    S = input().rstrip()
+    T = int(input().rstrip())
+    L = []
+    for _ in range(T):
+        N = int(input().rstrip())
+        tmp = []
+        for _ in range(N):
+            tmp.append(input().rstrip())
+        L.append([N, tmp])
 
-    data = [S]
+    data = [T, L]
     if DEBUG:
         ac = out_f.readline().rstrip()
         #ac = '\n'.join(map(lambda x:x.rstrip(), out_f))
@@ -39,15 +45,18 @@ def computeLPS(pat, lps):
                 lps[i] = 0
                 i += 1
 
-def solution(S):
-    ans = 0
-    S = memoryview(S.encode('utf-8'))
-    for i in range(len(S)):
-        tmp = S[i:]
-        lps = [0] * len(tmp)
-        computeLPS(tmp, lps)
-        ans = max(ans, *lps)
+def solution(T, L):
+    ans = []
+    for _, l in L:
+        l.sort()
+        for i in range(len(l)-1):
+            if l[i+1].startswith(l[i]):
+                ans.append('NO')
+                break
+        else:
+            ans.append('YES')
 
+    ans = "\n".join(ans)
     return str(ans) if type(ans) != str else ans
 
 def main():
