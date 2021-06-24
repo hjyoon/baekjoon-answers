@@ -6,23 +6,20 @@ import bisect
 DEBUG = 1
 
 TC = [
-    {'data': [5, ['ICPC', 'ACM', 'CONTEST', 'GCPC', 'PROGRAMM'], 3, [['ACMA', 'APCA', 'TOGI', 'NEST'], ['PCMM', 'RXAI', 'ORCN', 'GPCG'], ['ICPC', 'GCPC', 'ICPC', 'GCPC']]], 'AC': '8 CONTEST 4\n14 PROGRAMM 4\n2 GCPC 2'},
+    {'data': [4, [1, 2, 3, 4]], 'AC': '12'},
+    {'data': [5, [100, 2, 1, 3, 100]], 'AC': '10400'},
+    {'data': [7, [2, 2, 7, 6, 90, 5, 9]], 'AC': '1818'},
+    {'data': [10, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]], 'AC': '8'},
+    {'data': [5, [3, 1, 2, 4, 5]], 'AC': '33'}
 ]
 
 def read_data(l, in_f, out_f=None):
     input = in_f.readline
     #N, S = map(lambda x:x.rstrip(), in_f)
-    w = int(input().rstrip())
-    S = {input().rstrip() for _ in range(w)}
-    input()
-    b = int(input().rstrip())
-    B = []
-    for _ in range(b):
-        tmp = [input().rstrip() for _ in range(4)]
-        input()
-        B.append(tmp)
+    N = int(input().rstrip())
+    S = list(map(int, input().rstrip().split()))
 
-    data = [w, S, b, B]
+    data = [N, S]
     if DEBUG:
         #ac = out_f.readline().rstrip()
         ac = '\n'.join(map(lambda x:x.rstrip(), out_f))
@@ -30,69 +27,24 @@ def read_data(l, in_f, out_f=None):
     else:
         l.append({'data':data})
 
-def solution(w, S:set, b, B):
-    graph = {}
-    visit = [[0]*4 for _ in range(4)]
-    d = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
-    for i in range(4):
-        for j in range(4):
-            for y, x in d:
-                if i+y>=0 and j+x>=0 and i+y<4 and j+x<4:
-                    graph.setdefault(f'{i}{j}', []).append(f'{i+y}{j+x}')
+def solution(N, S:list):
+    ans = 0
 
-    def dfs(i, j, depth, txt):
-        nonlocal ans, score, find_list, longest_s
-        if visit[i][j] == 1:
+    def dfs(s:list, v):
+        nonlocal ans
+        if len(s) == 2:
+            ans = max(ans, v)
             return
-        if depth > 8:
-            return
+        for i in range(1, len(s)-1):
+            dfs(s[:i] + s[i+1:], v+(s[i-1]*s[i+1]))
+    
+    dfs(S[::], 0)
 
-        if txt in S and txt not in find_list:
-            ans += 1
-            find_list.add(txt)
-            if len(txt) <= 2:
-                score += 0
-            elif len(txt) <= 4:
-                score += 1
-            elif len(txt) <= 5:
-                score += 2
-            elif len(txt) <= 6:
-                score += 3
-            elif len(txt) <= 7:
-                score += 5
-            elif len(txt) <= 8:
-                score += 11
-
-            if longest_s == None:
-                longest_s = txt
-            else:
-                if len(longest_s) < len(txt):
-                    longest_s = txt
-                elif len(longest_s) == len(txt):
-                    if longest_s > txt:
-                        longest_s = txt
-        visit[i][j] = 1
-        nonlocal board
-        for v in graph[f'{i}{j}']:
-            y, x = map(int, v)
-            dfs(y, x, depth+1, txt + board[y][x])
-        visit[i][j] = 0
-    res = []
-    for board in B:
-        ans = 0
-        score = 0
-        longest_s = None
-        find_list = set()
-        for i in range(4):
-            for j in range(4):
-                dfs(i, j, 1, board[i][j])
-        res.append(f'{score} {longest_s} {ans}')
-
-    return '\n'.join(res)
+    return str(ans) if type(ans) != str else ans
 
 def main():
     if DEBUG:
-        #print_data()
+        print_data()
         #print(TC)
         pass
     else:
