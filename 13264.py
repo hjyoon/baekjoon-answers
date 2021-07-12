@@ -14,8 +14,8 @@ for i in range(n):
 group[n] = ''
 
 def custom_cmp(x, y, l):
-    if group[x] == group[y] and x+l < len(group):
-        return group[x+l] < group[y+l]
+    if group[x] == group[y]:
+        return group[min(x+l, n)] < group[min(y+l, n)]
     else:
         return group[x] < group[y]
 
@@ -27,8 +27,7 @@ def cmp(x, l):
 
 l = 1
 while l//2 < n:
-    #print(sa, group, l)
-    sa.sort(key=lambda x:cmp(x, l))
+    sa.sort(key=lambda x:(group[x], group[min(x+l, n)]))
     group2 = [0] * (n+1)
     group2[sa[0]] = 0
     group2[n] = -1
