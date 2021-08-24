@@ -5,7 +5,8 @@ input = sys.stdin.readline
 T = int(input())
 for _ in range(T):
     N = int(input())
-    S = [(-1, 0)] + sorted([tuple(map(int, input().split())) for _ in range(N)])
+    S = [(-1, 0)] + sorted([tuple(map(int, input().split()))
+                            for _ in range(N)])
     _, *M = map(int, input().split())
 
     for i in range(1, N+1):
