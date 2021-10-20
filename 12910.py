@@ -1,19 +1,39 @@
 import sys
+from collections import deque
 sys.stdin = open('input.txt')
 input = sys.stdin.readline
 
 
+def bfs(graph, visit, root):
+    ret = 0
+    dq = deque()
+    dq.append((root, 0))
+    while dq:
+        node, depth = dq.popleft()
+        visit[node] = 1
+        can_move = 0
+        for to in graph[node]:
+            if visit[to] == 0:
+                dq.append((to, depth+1))
+                can_move += 1
+        if can_move == 0:
+            # print(node)
+            ret += depth
+    return ret
+
+
 N = int(input())
-S = tuple(map(int, input().split()))
-dp = [0] * 50
-for v in S:
-    dp[v-1] += 1
+graph = [[] for _ in range(N+1)]
+for _ in range(N-1):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-ans = dp[0]
-for i in range(1, 50):
-    if dp[i] == 0:
-        break
-    dp[i] *= dp[i-1]
-    ans += dp[i]
+visit = [0] * (N+1)
 
-print(ans)
+total_cnt = bfs(graph, visit, 1)
+#print(visit, total_cnt)
+if total_cnt % 2:
+    print('Yes')
+else:
+    print('No')
