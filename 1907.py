@@ -47,7 +47,9 @@ def find_all_case(l):
 
 S = input().rstrip()
 l = split_3_parts(S)
+print(l)
 l = cal_mole(l)
+print(l)
 ans = find_all_case(l)
 
 print(*ans[0])
