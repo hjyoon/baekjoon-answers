@@ -6,7 +6,7 @@ d = {}
 ans = 0
 N = int(input())
 for _ in range(N):
-    t, name, *S = map(lambda x:x.rstrip(), input().split())
+    t, name, *S = map(lambda x: x.rstrip(), input().split())
     if t == '1':
         K, *S = map(int, S)
         if name in d:
@@ -14,10 +14,9 @@ for _ in range(N):
             for n in S:
                 heapq.heappush(pq, -n)
         else:
-            pq = list(map(lambda x:int(-x), S))
+            pq = list(map(lambda x: int(-x), S))
             heapq.heapify(pq)
             d[name] = pq
-        #print(d)
     else:
         K = int(S[0])
         if name in d:
@@ -29,6 +28,4 @@ for _ in range(N):
                 for _ in range(K):
                     tmp = heapq.heappop(pq)
                     ans -= tmp
-        #print(K)
-#print(d)
 print(ans)
