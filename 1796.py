@@ -14,11 +14,14 @@ for s in al:
         d[s].sort()
     
 def cal(S, s, cur_pos, fir, sec):
+    visit = set()
     enter = 0
     dir_key = 0
     while True:
         if S[cur_pos] == s:
-            enter += 1
+            if cur_pos not in visit:
+                enter += 1
+                visit.add(cur_pos)
         if cur_pos < fir:
             cur_pos += 1
             dir_key += 1
@@ -27,10 +30,12 @@ def cal(S, s, cur_pos, fir, sec):
             dir_key += 1
         else:
             break
-    if sec and fir != sec:
+    if sec != None and fir != sec:
         while True:
             if S[cur_pos] == s:
-                enter += 1
+                if cur_pos not in visit:
+                    enter += 1
+                    visit.add(cur_pos)
             if cur_pos < sec:
                 cur_pos += 1
                 dir_key += 1
@@ -52,14 +57,13 @@ def dfs(S, d, idx, cur_pos, ac):
     if s not in d:
         dfs(S, d, idx+1, cur_pos, ac)
         return
-    print(s, cur_pos, ac)
-    tmp_pos = cur_pos
+
     fir, sec = None, None
-    if tmp_pos <= d[s][0]:
+    if cur_pos <= d[s][0]:
         fir = d[s][-1]
         tmp_pos, val = cal(S, s, cur_pos, fir, sec)
         dfs(S, d, idx+1, tmp_pos, ac+val)
-    elif tmp_pos >= d[s][-1]:
+    elif cur_pos >= d[s][-1]:
         fir = d[s][0]
         tmp_pos, val = cal(S, s, cur_pos, fir, sec)
         dfs(S, d, idx+1, tmp_pos, ac+val)
@@ -68,8 +72,7 @@ def dfs(S, d, idx, cur_pos, ac):
         tmp_pos, val = cal(S, s, cur_pos, fir, sec)
         dfs(S, d, idx+1, tmp_pos, ac+val)
         
-        fir, sec = d[s][-1], d[s][0]
-        tmp_pos, val = cal(S, s, cur_pos, fir, sec)
+        tmp_pos, val = cal(S, s, cur_pos, sec, fir)
         dfs(S, d, idx+1, tmp_pos, ac+val)
         
 ans = float('inf')
