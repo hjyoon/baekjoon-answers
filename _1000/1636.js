@@ -4,16 +4,11 @@ const stdin = require("fs")
   .toString()
   .trimEnd()
   .split("\n");
-const input = (() => {
-  let line = 0;
-  return () => stdin[line++];
-})();
 
-const N = Number(input());
+const N = Number(stdin[0]);
 const arr = Array(100000);
 for (let i = 0; i < N; i++) {
-  const [s, e] = input().split(" ").map(Number);
-  arr[i] = [s, e];
+  arr[i] = stdin[i + 1].split(" ").map(Number);
 }
 
 let ans = Infinity;
@@ -23,14 +18,15 @@ for (let j = arr[0][0]; j <= arr[0][1]; j++) {
   let pos = j;
   let res = 0;
   for (let i = 0; i < N; i++) {
-    const [cur_s, cur_e] = arr[i];
-    if (cur_s <= pos && pos <= cur_e) {
-    } else if (pos > cur_e) {
-      res += pos - cur_e;
-      pos = cur_e;
-    } else if (pos < cur_s) {
-      res += cur_s - pos;
-      pos = cur_s;
+    if (pos > arr[i][1]) {
+      res += pos - arr[i][1];
+      pos = arr[i][1];
+    } else if (pos < arr[i][0]) {
+      res += arr[i][0] - pos;
+      pos = arr[i][0];
+    }
+    if (res >= ans) {
+      break;
     }
     res_arr[i] = pos;
   }
@@ -41,6 +37,4 @@ for (let j = arr[0][0]; j <= arr[0][1]; j++) {
 }
 
 console.log(ans);
-for (let i = 0; i < N; i++) {
-  console.log(ans_arr[i]);
-}
+console.log(ans_arr.join("\n"));
