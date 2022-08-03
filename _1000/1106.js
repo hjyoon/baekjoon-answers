@@ -9,34 +9,30 @@ const input = (() => {
   return () => stdin[line++];
 })();
 
-const dfs = async (people, price) => {
-  console.error(idx, people, price);
-  if (idx >= N) {
-    return;
-  }
-  if (price >= ans) {
-    idx++;
-    return;
-  }
-  if (people >= C) {
-    ans = Math.min(ans, price);
-    idx++;
-    return;
-  }
-  while (idx < N) {
-    dfs(people + cities[idx][1], price + cities[idx][0]);
-  }
-};
-
 const [C, N] = input().split(" ").map(Number);
 const cities = [...Array(N)].map(() => input().split(" ").map(Number));
-let idx = 0;
+const dp = Array(C + 101).fill(Infinity);
+dp[0] = undefined;
+
+for (let i = 1; i < dp.length; i++) {
+  for (const [price, people] of cities) {
+    if (i - people >= 0) {
+      if (dp[i - people] == undefined) {
+        dp[i] = Math.min(dp[i], price);
+      } else {
+        dp[i] = Math.min(dp[i], dp[i - people] + price);
+      }
+    }
+  }
+}
+
 let ans = Infinity;
-cities.sort((a, b) => b[1] / b[0] - a[1] / a[0]); // 효율이 높은게 앞으로 오게 정렬
+for (let i = C; i < dp.length; i++) {
+  ans = Math.min(ans, dp[i]);
+}
 
-// console.log(cities);
-// console.log(cities[idx][1], cities[idx][0]);
-
-dfs(cities[idx][1], cities[idx][0]);
+// dp.forEach((v, i) => {
+//   console.log(i, v);
+// });
 
 console.log(ans);
