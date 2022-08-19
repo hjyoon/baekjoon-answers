@@ -8,7 +8,7 @@ int main() {
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int max = 0;
+    int max = -1;
     int w=0, h=0;
 
     for(int i=1; i<=9; i++) {
