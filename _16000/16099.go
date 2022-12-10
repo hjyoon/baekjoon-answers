@@ -15,7 +15,7 @@ func main() {
 	T, _, _ := r.ReadLine()
 	T2, _ := strconv.Atoi(string(T))
 
-	for i:=0; i<T2; i++ {
+	for i := 0; i < T2; i++ {
 		line, _, _ := r.ReadLine()
 		line2 := string(line)
 
@@ -25,13 +25,13 @@ func main() {
 		le, _ := strconv.Atoi(slice[2])
 		we, _ := strconv.Atoi(slice[3])
 
-		s1 := lt*wt
-		s2 := le*we
+		s1 := lt * wt
+		s2 := le * we
 
 		var ans string
-		if (s1 == s2) {
+		if s1 == s2 {
 			ans = "Tie"
-		} else if (s1 <= s2) {
+		} else if s1 <= s2 {
 			ans = "Eurecom"
 		} else {
 			ans = "TelecomParisTech"
