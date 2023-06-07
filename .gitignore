@@ -3,3 +3,4 @@ output.txt
 /testcases
 **/bin
 **/target
+.vscode
