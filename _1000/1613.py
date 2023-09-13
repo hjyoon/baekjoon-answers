@@ -9,9 +9,9 @@ for _ in range(K):
     s, t = map(int, input().rstrip().split())
     graph[s][t] = 1
 
-for i in range(1, N+1):
-    for j in range(1, N+1):
-        for k in range(1, N+1):
+for k in range(1, N+1):
+    for i in range(1, N+1):
+        for j in range(1, N+1):
             if graph[i][k] == 1 and graph[k][j] == 1:
                 graph[i][j] = 1
 
